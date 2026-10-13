@@ -4,6 +4,7 @@ import helmet from 'helmet';
 import cookieParser from 'cookie-parser';
 import compression from 'compression';
 import { ValidationPipe } from '@nestjs/common';
+import SwaggerConfig from './configs/swagger.config.js';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -26,6 +27,8 @@ async function bootstrap() {
       transform: true,
     }),
   );
+
+  SwaggerConfig.setup(app);
 
   await app.listen(process.env.PORT ?? 3000);
 }
