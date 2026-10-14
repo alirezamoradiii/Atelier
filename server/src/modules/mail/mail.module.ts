@@ -34,4 +34,4 @@ const __dirname = fileURLToPath(new URL('.', import.meta.url));
   providers: [MailService],
   exports: [MailService],
 })
-export class MialModule {}
+export class MailModule {}
