@@ -1,13 +1,19 @@
-import { Column, Entity, PrimaryColumn, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
-enum RoleTypes {
+export enum RoleTypes {
   Admin = 'Admin',
   Customer = 'Customer',
   Seller = 'Seller',
-  Developer = 'Developer'
+  Developer = 'Developer',
 }
 
-@Entity()
+@Entity('users')
 export class UsersModel {
   @PrimaryGeneratedColumn('uuid')
   id: string;
@@ -16,21 +22,29 @@ export class UsersModel {
     type: 'varchar',
     length: 256,
     nullable: false,
-    unique: true
+    unique: true,
   })
   email: string;
 
   @Column({
     type: 'varchar',
     length: 256,
-    nullable: false
+    nullable: false,
+    select: false
   })
   password: string;
 
   @Column({
     type: 'enum',
     enum: RoleTypes,
-    default: RoleTypes.Customer
+    enumName: 'role_types',
+    default: RoleTypes.Customer,
   })
-  role: RoleTypes 
+  role: RoleTypes;
+
+  @CreateDateColumn()
+  created_at: Date;
+
+  @UpdateDateColumn()
+  updated_at: Date;
 }
