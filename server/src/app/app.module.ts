@@ -7,11 +7,13 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import dbConfig from '../configs/db.config.js';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import DataResponseInterceptor from '../common/interceptors/response.interceptor.js';
+import { MialModule } from '../modules/mail/mail.module.js';
 
 const ENV = process.env.NODE_ENV;
 
 @Module({
   imports: [
+    MialModule,
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: !ENV ? '.env' : `.env.${ENV}.local`,
