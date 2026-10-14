@@ -12,7 +12,7 @@ export default class SwaggerConfig {
     const config = new DocumentBuilder()
       .setTitle('Atelier API')
       .addServer(`http://localhost:${port}`)
-      .setVersion('1.0.0')
+      .setVersion(`${process.env.API_VERSION}`)
       .build();
 
     const document = SwaggerModule.createDocument(app, config);
