@@ -8,6 +8,7 @@ import SwaggerConfig from './configs/swagger.config.js';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.setGlobalPrefix('api');
 
   app.use(helmet());
   app.use(cookieParser());
