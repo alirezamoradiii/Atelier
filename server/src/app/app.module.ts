@@ -5,6 +5,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import appConfig from '../configs/app.config.js';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import dbConfig from '../configs/db.config.js';
+import { APP_INTERCEPTOR } from '@nestjs/core';
+import DataResponseInterceptor from '../common/interceptors/response.interceptor.js';
 
 const ENV = process.env.NODE_ENV;
 
@@ -30,6 +32,12 @@ const ENV = process.env.NODE_ENV;
     }),
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: DataResponseInterceptor
+    }
+  ],
 })
 export class AppModule {}
