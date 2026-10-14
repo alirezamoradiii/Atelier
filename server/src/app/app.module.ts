@@ -9,6 +9,7 @@ import { APP_INTERCEPTOR } from '@nestjs/core';
 import DataResponseInterceptor from '../common/interceptors/response.interceptor.js';
 import { MailModule } from '../modules/mail/mail.module.js';
 import { AuthModule } from '../modules/auth/auth.module.js';
+import { UsersModule } from '../modules/users/users.module.js';
 
 const ENV = process.env.NODE_ENV;
 
@@ -16,6 +17,7 @@ const ENV = process.env.NODE_ENV;
   imports: [
     MailModule,
     AuthModule,
+    UsersModule,
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: !ENV ? '.env' : `.env.${ENV}.local`,
